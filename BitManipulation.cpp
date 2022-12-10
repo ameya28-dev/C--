@@ -74,7 +74,23 @@ void find2UniqueNumbers(int arr[], int n){
         if (getBit(arr[i],pos)) xorsum2 ^= arr[i];
     }
 
-    cout << xorsum2 << "\t" << (xorsum2 ^ xorsum);    
+    cout << xorsum2 << "\t" << (xorsum2 ^ xorsum) << endl;    
+}
+
+int findUniqueAmongTriplets(int arr[], int n){
+    int result = 0; 
+    for(int i=0; i <64; i++){
+        int sum = 0;
+        for(int j = 0; j < n; j++){
+            if (getBit(arr[j],i)){
+                sum++;
+            } 
+        } 
+        if (sum%3 != 0){
+            result = setBit(result,i);
+        }
+    }
+    return result;
 }
 
 int main(){
@@ -99,12 +115,15 @@ int main(){
 
     // Find number which appears once in an array while the rest appear twice
     int unique1array[] = {1,7,2,2,1};
-    cout << "Find unique one: " << findUniqueNumber(unique1array, 5) << endl;
+    cout << "Find unique one: " << findUniqueNumber(unique1array, 5) << endl ;
 
     // Find 2 numbers which appears once in an array while the rest appear twice
     int unique2array[] = {2,99,8,7,8,2};
     cout << "Find 2 unique numbers: ";
     find2UniqueNumbers(unique2array, 6);
+
+    int unique3array[] = {1,1,2,8,1,2,2};
+    cout << "Find unique number among triplets: " << findUniqueAmongTriplets(unique3array, sizeof(unique3array)/sizeof(int));
 
     return 0;
 }
