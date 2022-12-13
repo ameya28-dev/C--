@@ -5,7 +5,13 @@
 
 using namespace std;
 
+bool myComparator(pair<int,int> p1, pair<int,int> p2){
+    return p1.second <= p2.second;
+}
+
 int main(){
+
+    #pragma region Vector
     vector<int> v;
     v.push_back(3);
     v.push_back(2);
@@ -40,6 +46,41 @@ int main(){
     for(vector<int>:: iterator it = v2.begin(); it!=v2.end(); it++){
         cout << *it << "\t";
     }
+    #pragma endregion Vector
+
+    #pragma region Pair
+    
+    pair<int,char> p1;
+    p1.first = 2;
+    p1.second = 'f';
+
+    pair<int,char> p2 = make_pair(4,'d');
+
+    // Program to reduce an error
+    // Update smallest element to 0, next to 1 and so on until len(arr) - 1
+    int arr[] = {10,16,7,14,5,3,12,9};
+    vector <pair<int,int>> vec;
+
+    // Storing key-value pair for every element in arr 
+    for(int i=0; i < sizeof(arr)/sizeof(int); i++){
+        vec.push_back(make_pair(i,arr[i]));
+    }
+    
+    // Sorting vec using a comparator
+    std :: sort(vec.begin(), vec.end(), myComparator);
+
+    // Changing values in array
+    for(int i = 0; i < vec.size(); i++){
+        arr[vec[i].first] = i;
+    }
+
+    // printing Reduced array
+    cout << endl << "Reducing array: " << endl;
+    for(int i = 0; i < sizeof(arr)/sizeof(int); i++){
+        cout << arr[i] << "\t";
+    }
+
+    #pragma endregion Pair
 
     return 0;
 }
