@@ -74,7 +74,7 @@ int main(){
         arr[vec[i].first] = i;
     }
 
-    // printing Reduced array
+    // printig Reduced array
     cout << endl << "Reducing array: " << endl;
     for(int i = 0; i < sizeof(arr)/sizeof(int); i++){
         cout << arr[i] << "\t";
