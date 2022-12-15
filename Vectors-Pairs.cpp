@@ -52,7 +52,7 @@ int main(){
 
     pair<int,char> p2 = make_pair(4,'d');
 
-    // Program to reduce an error
+    // Program to reduce an array
     // Update smallest element to 0, next to 1 and so on until len(arr) - 1
     int arr[] = {10,16,7,14,5,3,12,9};
     vector <pair<int,int>> vec;
@@ -70,7 +70,7 @@ int main(){
         arr[vec[i].first] = i;
     }
 
-    // printig Reduced array
+    // printing Reduced array
     cout << endl << "Reducing array: " << endl;
     for(int i = 0; i < sizeof(arr)/sizeof(int); i++){
         cout << arr[i] << "\t";
