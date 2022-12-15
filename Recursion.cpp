@@ -80,7 +80,7 @@ int main(){
     cout << endl;
 
     // Tower of Hanoi
-    towerOfHanoi(5,'A','C','B');
+    towerOfHanoi(6,'A','C','B');
 
     return 0;
 }
