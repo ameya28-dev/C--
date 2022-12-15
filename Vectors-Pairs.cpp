@@ -11,7 +11,6 @@ bool myComparator(pair<int,int> p1, pair<int,int> p2){
 
 int main(){
 
-    #pragma region Vector
     vector<int> v;
     v.push_back(3);
     v.push_back(2);
@@ -46,9 +45,6 @@ int main(){
     for(vector<int>:: iterator it = v2.begin(); it!=v2.end(); it++){
         cout << *it << "\t";
     }
-    #pragma endregion Vector
-
-    #pragma region Pair
     
     pair<int,char> p1;
     p1.first = 2;
@@ -79,8 +75,6 @@ int main(){
     for(int i = 0; i < sizeof(arr)/sizeof(int); i++){
         cout << arr[i] << "\t";
     }
-
-    #pragma endregion Pair
 
     return 0;
 }
