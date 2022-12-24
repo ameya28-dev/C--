@@ -57,6 +57,43 @@ void towerOfHanoi(int n, char src, char dest, char helper){
     towerOfHanoi(n-1,helper,dest,src);
 }
 
+string removeDuplicates(string s){
+    if(!s.length()){
+        return "";
+    }
+
+    char ch = s[0];
+    string ans = removeDuplicates(s.substr(1));
+
+    if(ch == ans[0]){
+        return ans;
+    }
+    else return (ch+ans);
+}
+
+string moveAllXToEnd(string s){
+    if(s.length()==0) return "";
+
+    char ch = s[0];
+    string ans = moveAllXToEnd(s.substr(1));
+
+    if(ch == 'x') return ans+ch;
+    else return ch+ans;
+}
+
+string allSubstr(string s, string ans){
+    if (s.length() == 0) {
+        cout << ans << endl;
+        return "";
+    }
+
+    char ch = s[0];
+    string sub = s.substr(1);
+
+    allSubstr(sub,ans);
+    allSubstr(sub, ans+ch);
+}
+
 int main(){
 
     // Find if array is sorted
@@ -81,6 +118,16 @@ int main(){
 
     // Tower of Hanoi
     towerOfHanoi(6,'A','C','B');
+    cout << endl;
+
+    // Remove all consecutive duplicates from a string
+    cout << removeDuplicates("aaabaahcnnncddssssa") << endl;
+
+    // Move all 'x' to the end of a string
+    cout << moveAllXToEnd("xakdmxjjjbbxbbxxxxuxx") << endl;
+
+    // All substrings of a string
+    allSubstr("ABCD","");
 
     return 0;
 }
