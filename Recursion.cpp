@@ -81,10 +81,10 @@ string moveAllXToEnd(string s){
     else return ch+ans;
 }
 
-string allSubstr(string s, string ans){
+void allSubstr(string s, string ans){
     if (s.length() == 0) {
         cout << ans << endl;
-        return "";
+        return;
     }
 
     char ch = s[0];
@@ -92,6 +92,38 @@ string allSubstr(string s, string ans){
 
     allSubstr(sub,ans);
     allSubstr(sub, ans+ch);
+}
+
+void substringWithASCII(string s, string ans){
+    if (s.length()==0){
+        cout << ans << endl;
+        return;
+    }
+
+    char ch = s[0];
+    int code = ch;
+    string ros = s.substr(1);
+
+    substringWithASCII(ros, ans);
+    substringWithASCII(ros, ans+ch);
+    substringWithASCII(ros, ans + to_string(code));
+}
+
+string keypadArray[] = {"","./","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+void keypad(string s, string ans){
+    if(s.length()==0){
+        cout << ans << endl;
+        return;
+    }
+
+    char ch = s[0];
+    string code = keypadArray[ch-'0'];
+    string ros = s.substr(1);
+
+    for(int i = 0; i<code.length();i++){
+        keypad(ros, ans+code[i]);
+    }
 }
 
 int main(){
@@ -128,6 +160,11 @@ int main(){
 
     // All substrings of a string
     allSubstr("ABCD","");
+
+    // All substrings with ASCII code
+    substringWithASCII("AB","");
+
+    keypad("56","");
 
     return 0;
 }
