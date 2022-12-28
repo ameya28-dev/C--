@@ -63,15 +63,47 @@ bool searchNode(Node* head, int key){
     return false;
 }
 
+// Delete a node
+void deleteNode(Node* &head, int val){
+    if(head == NULL){
+        return;
+    }
+
+    if(head->data == val){
+        if(head->next == NULL){
+            Node* todelete = new Node(val);
+            delete todelete;
+            return;
+        }
+        else{
+            Node* todelete = head;
+            head = head->next;
+            delete todelete;
+            return;
+        }
+    }
+    
+    Node* temp = head;
+
+    while(temp->next->data != val){
+        temp = temp->next;
+    }
+    Node* todelete = temp->next; // this has to be deleted to avoid memory leak
+    temp->next = temp->next->next;
+    delete todelete;
+}
+
 int main(){
     Node* head = NULL;
     insertNodeAtTail(head,1);
     insertNodeAtTail(head,2);
     insertNodeAtTail(head,3);
-    insertNodeAtHead(head,0);
+    // insertNodeAtHead(head,0);
     display(head);
-    cout << "If node is present: " << searchNode(head,5);
-    cout << "If node is present: " << searchNode(head, 3);
+    cout << "If node is present: " << searchNode(head,5) << endl;
+    cout << "If node is present: " << searchNode(head, 3) << endl;
+    deleteNode(head,1);
+    display(head);
 
     return 0;
 }
