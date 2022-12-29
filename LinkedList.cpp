@@ -124,6 +124,27 @@ Node* reverseLLRecursively(Node* &head){
     return newhead;
 }
 
+Node* reverseKNodes(Node* &head, int k){
+    Node* prevptr = NULL;
+    Node* currptr = head;
+    Node* nextptr;
+    int count=0;
+
+    while(currptr != NULL && count<k){
+        nextptr = currptr->next;
+        currptr->next = prevptr;
+        prevptr = currptr;
+        currptr = nextptr;
+        count++; 
+    }
+
+    if(nextptr != NULL){
+        head->next = reverseKNodes(nextptr,k);
+    }
+
+    return prevptr;
+}
+
 int main(){
     Node* head = NULL;
     insertNodeAtTail(head,1);
@@ -138,11 +159,19 @@ int main(){
     deleteNode(head,4);
     cout << "LinkedList after removing 4:\t";
     display(head);
+
+    insertNodeAtTail(head,4);
+    insertNodeAtTail(head,5);
     cout << "Reversing the linked list iteratively:\t";
-    Node* newLL = reverseLLIteratively(head);
-    display(newLL);
+    Node* newiLL = reverseLLIteratively(head);
+    display(newiLL);
     cout << "Reversing the linked list recursively:\t";
-    display(reverseLLRecursively(newLL));
+    Node * newrLL = reverseLLRecursively(newiLL);
+    display(newrLL);
+
+    cout << "Reversing k nodes of a linked list:\t";
+    Node* newkll = reverseKNodes(newrLL,2);
+    display(newkll);
 
     return 0;
 }
