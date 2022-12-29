@@ -93,17 +93,56 @@ void deleteNode(Node* &head, int val){
     delete todelete;
 }
 
+// Reverse a Linked List Iteratively
+// Need 3 pointer to be able to traverse linked list
+Node* reverseLLIteratively(Node* &head){
+    Node* prevptr = NULL;
+    Node* currptr = head;
+    Node* nextptr;
+
+    while(currptr != NULL){
+        nextptr = currptr->next;
+        currptr->next = prevptr;
+
+        prevptr = currptr;
+        currptr = nextptr;
+    }
+
+    return prevptr;
+}
+
+Node* reverseLLRecursively(Node* &head){
+    // Base Case: If LL is empty or has only one node
+    if(head == NULL || head->next == NULL) return head;
+
+    Node* newhead = reverseLLRecursively(head->next);
+    // Assuming recursion will provide a smaller linked list
+    // We have to reverse the next node to head towards the node
+    head->next->next = head;
+    head->next = NULL;
+
+    return newhead;
+}
+
 int main(){
     Node* head = NULL;
     insertNodeAtTail(head,1);
     insertNodeAtTail(head,2);
     insertNodeAtTail(head,3);
-    // insertNodeAtHead(head,0);
+    insertNodeAtHead(head,0);
+    insertNodeAtHead(head,4);
+    cout << "Original Linked List: ";
     display(head);
-    cout << "If node is present: " << searchNode(head,5) << endl;
-    cout << "If node is present: " << searchNode(head, 3) << endl;
-    deleteNode(head,1);
+    cout << "If node 5 is present: " << searchNode(head,5) << endl;
+    cout << "If node 3 is present: " << searchNode(head, 3) << endl;
+    deleteNode(head,4);
+    cout << "LinkedList after removing 4:\t";
     display(head);
+    cout << "Reversing the linked list iteratively:\t";
+    Node* newLL = reverseLLIteratively(head);
+    display(newLL);
+    cout << "Reversing the linked list recursively:\t";
+    display(reverseLLRecursively(newLL));
 
     return 0;
 }
