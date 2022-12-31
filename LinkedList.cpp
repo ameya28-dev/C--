@@ -145,6 +145,55 @@ Node* reverseKNodes(Node* &head, int k){
     return prevptr;
 }
 
+void makeCycle(Node* &head, int pos){
+    Node* temp = head;
+    Node* startNode;
+
+    int count = 1;
+    while(temp->next!=NULL){
+        if(count == pos){
+            startNode = temp;
+        }
+        temp = temp->next;
+        count++;
+    }
+
+    temp->next = startNode;
+}
+
+bool detectCycle(Node* head){
+    Node* fast = head;
+    Node* slow = head;
+
+    while(fast!= NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(fast ==  slow) return true;
+    }
+
+    return false;
+}
+
+// Assuming we have found a cycle in the linked list
+void removeCycle(Node* &head){
+    Node* slow = head;
+    Node* fast = head;
+
+    do{
+        slow = slow->next;
+        fast = fast->next->next;
+    } while(slow!=fast);
+
+    fast = head;
+    while(slow->next != fast->next){
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = NULL;
+}
+
 int main(){
     Node* head = NULL;
     insertNodeAtTail(head,1);
@@ -172,6 +221,20 @@ int main(){
     cout << "Reversing k nodes of a linked list:\t";
     Node* newkll = reverseKNodes(newrLL,2);
     display(newkll);
+
+    Node* cyclehead = NULL;
+    insertNodeAtTail(cyclehead,1);
+    insertNodeAtTail(cyclehead,2);
+    insertNodeAtTail(cyclehead,3);
+    insertNodeAtTail(cyclehead,4);
+    insertNodeAtTail(cyclehead,5);
+    insertNodeAtTail(cyclehead,6);
+    makeCycle(cyclehead,3);
+
+    cout << "Is there a cycle present:\t" << detectCycle(cyclehead) << endl;
+    cout << "Linked List after Removing cycle:\t";
+    removeCycle(cyclehead);
+    display(cyclehead);
 
     return 0;
 }
