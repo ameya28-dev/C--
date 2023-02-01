@@ -171,6 +171,24 @@ Node* mergeLLRecursively(Node* &head1, Node* &head2){
     return result;
 }
 
+void evenAfterOdd(Node* &head){
+    Node* odd = head;
+    Node* even = head->next;
+    Node* evenStart = even;
+
+    while(odd->next != NULL && even->next != NULL){
+        odd->next = even->next;
+        odd = odd->next;
+        even->next = odd->next;
+        even = even->next;        
+    }
+
+    odd->next = evenStart;
+    if(odd->next != NULL){
+        even->next = NULL;
+    }
+}
+
 int main(){
     cout << "Append K Nodes:" << "\n";
     Node* head = NULL;
@@ -216,6 +234,14 @@ int main(){
     display(Rsortedhead2);
     Node* newRMerged = mergeLLRecursively(Rsortedhead1,Rsortedhead2);
     display(newRMerged);
+    cout << "\n";
+
+    cout << "Even After Odd: " << "\n";
+    Node* headeo = NULL;
+    for(int i=0;i <6;i++) insertNodeAtTail(headeo,arr[i]);
+    display(headeo);
+    evenAfterOdd(headeo);
+    display(headeo);
     cout << "\n";
 
     return 0;
