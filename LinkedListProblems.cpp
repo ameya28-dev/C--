@@ -184,7 +184,7 @@ void evenAfterOdd(Node* &head){
     }
 
     odd->next = evenStart;
-    if(odd->next != NULL){
+    if(odd->next == NULL){
         even->next = NULL;
     }
 }
@@ -238,7 +238,8 @@ int main(){
 
     cout << "Even After Odd: " << "\n";
     Node* headeo = NULL;
-    for(int i=0;i <6;i++) insertNodeAtTail(headeo,arr[i]);
+    int arreo[] = {1,2,3,4,5,6,7};
+    for(int i=0;i <7;i++) insertNodeAtTail(headeo,arreo[i]);
     display(headeo);
     evenAfterOdd(headeo);
     display(headeo);
