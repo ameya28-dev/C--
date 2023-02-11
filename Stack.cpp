@@ -71,6 +71,26 @@ void reverseSentence(string s){
     cout << "\n";
 }
 
+void insertAtBottom(stack<int> &st, int element){
+    if(st.empty()){
+        st.push(element);
+        return;
+    }
+
+    int topelement =  st.top();
+    st.pop();
+    insertAtBottom(st, topelement);
+}
+
+void reverseStack(stack<int> st){
+    if(st.empty()) return;
+
+    int element = st.top();
+    st.pop();
+    reverseStack(st);
+    insertAtBottom(st,element); 
+}
+
 int main(){
     Stack st = Stack();
     st.push(1);
@@ -84,6 +104,18 @@ int main(){
 
     string s = "Hey, how are you doing?";
     reverseSentence(s);
-    
+
+    stack<int> reversestack;
+    reversestack.push(1);
+    reversestack.push(2);
+    reversestack.push(3);
+    reversestack.push(4);
+
+    reverseStack(reversestack);
+    while(!reversestack.empty()){
+        cout << reversestack.top() << " ";
+        reversestack.pop();
+    }
+
     return 0;
 }
