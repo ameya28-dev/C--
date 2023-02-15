@@ -48,7 +48,9 @@ string infixToPostfix(string s){
 
 string infixToPrefix(string s){
     reverse(s.begin(),s.end());
+    cout << s <<"\n";
     string res = infixToPostfix(s);
+    cout << res << "\n";
     reverse(res.begin(),res.end());
     return (res);
 }
