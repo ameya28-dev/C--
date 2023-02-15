@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include <stack>
 #include <cmath>
 
@@ -42,10 +43,15 @@ string infixToPostfix(string s){
             st.pop();
     }
 
-
     return res;
 }
 
+string infixToPrefix(string s){
+    reverse(s.begin(),s.end());
+    string res = infixToPostfix(s);
+    reverse(res.begin(),res.end());
+    return (res);
+}
 
 int prefixEvaluation(string s){
     stack<int> st;
@@ -124,6 +130,9 @@ int main(){
 
     cout << "Convert Infix expression to Postfix :\n";
     cout << infixToPostfix("(a-b/c)*(a/k-l)") << "\n\n";
+
+    cout << "Convert Infix expression to Prefix :\n";
+    cout << infixToPrefix("(a-b/c)*(a/k-l)") << "\n\n";
 
     return 0;
 }
