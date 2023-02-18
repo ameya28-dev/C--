@@ -13,7 +13,7 @@ class QueueUsingArray{
     int back; 
 
     public:
-        Queue(){
+        QueueUsingArray(){
             front = -1;
             back = -1;
         }
@@ -58,10 +58,10 @@ class QueueUsingArray{
 };
 
 class Node{
-    int data;
-    Node* next;
-
     public:
+        int data;
+        Node* next;
+
         Node(int x){
             data = x;
             next = NULL;
@@ -79,15 +79,15 @@ class QueueUsingLinkedList{
         }
 
         void enqueue(int x){
-            Node* n = new Node(x);
+            Node* node = new Node(x);
 
             if(front == NULL){
-                front = n;
-                back = n;
+                front = node;
+                back = node;
                 return;
             }
-            back->next = n;
-            back = n;
+            back->next = node;
+            back = node;
         }
 
         void dequeue(){
@@ -122,10 +122,10 @@ int main(){
     qa.enqueue(3);
     qa.enqueue(4);
     qa.dequeue();
-    cout << "Is this queue empty: "<< q.empty() <<"\n";
-    cout << "First element: "<< q.peek() <<"\n";
+    cout << "Is this queue empty: "<< qa.empty() <<"\n";
+    cout << "First element: "<< qa.peek() <<"\n";
 
-    QueueUsingLinkedList gl = QueueUsingLinkedList();
+    QueueUsingLinkedList ql = QueueUsingLinkedList();
     ql.enqueue(1);
     ql.enqueue(2);
     ql.enqueue(3);
@@ -140,7 +140,7 @@ int main(){
     cout << ql.peek() <<"\n";
     ql.dequeue();
 
-    cout << ql.empty() <"\n";
+    cout << ql.empty() <<"\n";
 
     return 0;
 }
