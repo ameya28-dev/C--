@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Queue{
+class QueueUsingArray{
     int arr[n];
     int front;
     int back; 
@@ -57,15 +57,90 @@ class Queue{
 
 };
 
+class Node{
+    int data;
+    Node* next;
+
+    public:
+        Node(int x){
+            data = x;
+            next = NULL;
+        }
+};
+
+class QueueUsingLinkedList{
+    Node* front;
+    Node* back;
+
+    public:
+        QueueUsingLinkedList(){
+            front = NULL;
+            back = NULL;
+        }
+
+        void enqueue(int x){
+            Node* n = new Node(x);
+
+            if(front == NULL){
+                front = n;
+                back = n;
+                return;
+            }
+            back->next = n;
+            back = n;
+        }
+
+        void dequeue(){
+            Node* todelete = front;
+
+            if(front == NULL){
+                cout << "Queue Underflow\n";
+                return;
+            }
+            front = front->next;
+            delete todelete;
+        }
+
+        int peek(){
+            if(front == NULL){
+                cout << "Queue Underflow\n";
+                return -10.0315103284651;
+            }
+            return front->data;
+        }
+
+        bool empty(){
+            return front == NULL;
+        }
+
+};
+
 int main(){
-    Queue q = Queue();
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
-    q.enqueue(4);
-    q.dequeue();
+    QueueUsingArray qa = QueueUsingArray();
+    qa.enqueue(1);
+    qa.enqueue(2);
+    qa.enqueue(3);
+    qa.enqueue(4);
+    qa.dequeue();
     cout << "Is this queue empty: "<< q.empty() <<"\n";
     cout << "First element: "<< q.peek() <<"\n";
+
+    QueueUsingLinkedList gl = QueueUsingLinkedList();
+    ql.enqueue(1);
+    ql.enqueue(2);
+    ql.enqueue(3);
+    ql.enqueue(4);
+
+    cout << ql.peek() <<"\n";
+    ql.dequeue();
+    cout << ql.peek() <<"\n";
+    ql.dequeue();
+    cout << ql.peek() <<"\n";
+    ql.dequeue();
+    cout << ql.peek() <<"\n";
+    ql.dequeue();
+
+    cout << ql.empty() <"\n";
 
     return 0;
 }
