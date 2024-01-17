@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
@@ -78,3 +79,34 @@ int main(){
 
     return 0;
 }
+class Solution {
+public:
+    int sumofdigits(int n){
+        int ans = 0;
+        while(n>0){
+            ans += n%10;
+            n = n/10;
+        }
+        return ans;
+    }
+
+    int countBalls(int lowLimit, int highLimit) {
+        unordered_map<int, int> ballcount;
+        int index;
+        int maximum = 0;
+        for(int i = lowLimit; i<= highLimit; i++){
+            index = sumofdigits(i);
+            if(ballcount.find(index) != ballcount.end()){
+                maximum = max(maximum, ballcount[index]+1);
+            }
+            (ballcount[index])++;
+        }
+        // unordered_map<int, int>:: iterator p;
+        // int maximum = 0;
+        // for(p = ballcount.begin(); p != ballcount.end(); p++){
+        //     if(maximum < p->second) maximum = p->second;
+        // }
+
+        return maximum;
+    }
+};
